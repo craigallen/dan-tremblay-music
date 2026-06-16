@@ -7,6 +7,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <!-- ── HERO ──────────────────────────────────────────────── -->
   <section class="hero">
     <div class="hero-bg"></div>
+    <canvas id="hero-particles"></canvas>
     <div class="hero-content">
       <div class="hero-eyebrow">Piano · Lessons · Ottawa</div>
       <h1 class="hero-name">Dan Tremblay</h1>
@@ -27,7 +28,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="about" id="lessons">
     <div class="container">
       <div class="about-grid">
-        <div class="about-photo-wrap">
+        <div class="about-photo-wrap" data-reveal="left">
           <img
             src="/images/dan-tremblay.jpeg"
             alt="Dan Tremblay"
@@ -35,7 +36,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           />
           <div class="about-photo-accent"></div>
         </div>
-        <div class="about-content">
+        <div class="about-content" data-reveal="right">
           <span class="eyebrow">Based in Stittsville, Ottawa</span>
           <h2 class="section-h">About Dan</h2>
           <p class="about-body">
@@ -68,7 +69,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="offerings-bg"></div>
     <div class="container">
       <div class="offerings-grid">
-        <div class="offerings-content">
+        <div class="offerings-content" data-reveal="left">
           <div class="offerings-group">
             <h3 class="offerings-group-title">What I Offer</h3>
             <div class="check-list">
@@ -87,7 +88,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </div>
           </div>
         </div>
-        <div class="offerings-photo-wrap">
+        <div class="offerings-photo-wrap" data-reveal="right">
           <img
             src="/images/dan-teaching-piano.webp"
             alt="Dan teaching piano"
@@ -101,12 +102,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <!-- ── SERVICES ───────────────────────────────────────────── -->
   <section class="services" id="services">
     <div class="container">
-      <div class="services-header">
+      <div class="services-header" data-reveal="up">
         <span class="eyebrow">Beyond Lessons</span>
         <h2 class="section-h" style="margin-top:10px">Other Music Services</h2>
       </div>
       <div class="services-grid">
-        <a href="/production" class="service-card">
+        <a href="/production" class="service-card" data-reveal="up" data-reveal-delay="0">
           <div class="service-card-img">
             <img src="/images/dan-production.webp" alt="Music Production Services" />
           </div>
@@ -124,6 +125,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           target="_blank"
           rel="noopener noreferrer"
           class="service-card"
+          data-reveal="up"
+          data-reveal-delay="120"
         >
           <div class="service-card-img">
             <img src="/images/online-course-small.webp" alt="Online Piano Courses" />
@@ -137,7 +140,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <span class="service-card-link">Browse Courses</span>
           </div>
         </a>
-        <a href="/live" class="service-card">
+        <a href="/live" class="service-card" data-reveal="up" data-reveal-delay="240">
           <div class="service-card-img">
             <img src="/images/dan-live-small.webp" alt="Book Dan Live" />
           </div>
@@ -157,11 +160,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <!-- ── TESTIMONIALS ───────────────────────────────────────── -->
   <section class="testimonials">
     <div class="container">
-      <div class="testimonials-header">
+      <div class="testimonials-header" data-reveal="up">
         <span class="eyebrow">What Students Say</span>
         <h2 class="section-h" style="margin-top:10px">Testimonials</h2>
       </div>
-      <div class="featured-quote">
+      <div class="featured-quote" data-reveal="up" data-reveal-delay="100">
         <span class="quote-opener">"</span>
         <p class="quote-text">
           Dan Tremblay has taught our daughter since she was a young child, instilling
@@ -173,7 +176,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <p class="quote-attr">— William F.</p>
       </div>
       <div class="reviews-grid">
-        <div class="review-card">
+        <div class="review-card" data-reveal="up" data-reveal-delay="0">
           <div class="review-header">
             <div class="review-av">L</div>
             <div>
@@ -191,7 +194,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <span class="google-g">G</span> Google Review
           </div>
         </div>
-        <div class="review-card">
+        <div class="review-card" data-reveal="up" data-reveal-delay="120">
           <div class="review-header">
             <div class="review-av" style="background:#5a8c6b">K</div>
             <div>
@@ -209,7 +212,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <span class="google-g">G</span> Google Review
           </div>
         </div>
-        <div class="review-card">
+        <div class="review-card" data-reveal="up" data-reveal-delay="240">
           <div class="review-header">
             <div class="review-av" style="background:#8c6b5a">J</div>
             <div>
@@ -350,12 +353,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     overflow: hidden;
   }
 
+  @keyframes heroFadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
   .hero-bg {
     position: absolute;
     inset: 0;
     background-image: url('/images/piano.jpg');
     background-size: cover;
     background-position: center 30%;
+  }
+
+  #hero-particles {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
   }
 
   .hero-bg::after {
@@ -390,6 +405,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     align-items: center;
     justify-content: center;
     gap: 14px;
+    opacity: 0;
+    animation: heroFadeUp 0.9s ease forwards 0.3s;
   }
 
   .hero-eyebrow::before,
@@ -410,6 +427,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     line-height: 0.92;
     text-transform: uppercase;
     margin-bottom: 22px;
+    opacity: 0;
+    animation: heroFadeUp 1s ease forwards 0.65s;
   }
 
   .hero-rule {
@@ -417,6 +436,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     height: 1px;
     background: rgba(255, 255, 255, 0.28);
     margin: 0 auto 22px;
+    opacity: 0;
+    animation: heroFadeUp 0.9s ease forwards 1s;
   }
 
   .hero-title {
@@ -426,6 +447,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-style: italic;
     color: rgba(255, 255, 255, 0.82);
     margin-bottom: 10px;
+    opacity: 0;
+    animation: heroFadeUp 0.9s ease forwards 1.15s;
   }
 
   .hero-sub {
@@ -435,6 +458,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: rgba(255, 255, 255, 0.5);
     margin-bottom: 42px;
     line-height: 1.7;
+    opacity: 0;
+    animation: heroFadeUp 0.9s ease forwards 1.3s;
   }
 
   .hero-actions {
@@ -442,6 +467,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     gap: 14px;
     justify-content: center;
     flex-wrap: wrap;
+    opacity: 0;
+    animation: heroFadeUp 0.9s ease forwards 1.5s;
   }
 
   /* ── ABOUT ───────────────────────────────────────────── */
@@ -851,6 +878,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     line-height: 1.2;
   }
 
+  /* ── SCROLL REVEAL ───────────────────────────────────── */
+  [data-reveal] {
+    opacity: 0;
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  [data-reveal="up"]    { transform: translateY(32px); }
+  [data-reveal="left"]  { transform: translateX(-32px); }
+  [data-reveal="right"] { transform: translateX(32px); }
+
+  [data-reveal].revealed {
+    opacity: 1;
+    transform: none;
+  }
+
   /* ── RESPONSIVE ──────────────────────────────────────── */
   @media (max-width: 960px) {
     .about-grid,
@@ -895,3 +937,90 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
   }
 </style>
+
+<script>
+  const canvas = document.getElementById('hero-particles') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d')!;
+  const hero = canvas.closest('.hero') as HTMLElement;
+
+  interface Particle {
+    x: number; y: number;
+    vx: number; vy: number;
+    radius: number;
+    alpha: number;
+    alphaDir: number;
+  }
+
+  const COUNT = 110;
+  let particles: Particle[] = [];
+  let started = false;
+
+  function spawnParticles() {
+    particles = [];
+    for (let i = 0; i < COUNT; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.22,
+        vy: -Math.random() * 0.18 - 0.06,
+        radius: Math.random() * 1.8 + 0.4,
+        alpha: Math.random() * 0.35 + 0.05,
+        alphaDir: Math.random() < 0.5 ? 1 : -1,
+      });
+    }
+  }
+
+  function tick() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const p of particles) {
+      p.x  += p.vx;
+      p.y  += p.vy;
+      p.alpha += p.alphaDir * 0.0008;
+      if (p.alpha > 0.4)  p.alphaDir = -1;
+      if (p.alpha < 0.03) p.alphaDir =  1;
+      if (p.x < 0) p.x = canvas.width;
+      if (p.x > canvas.width) p.x = 0;
+      if (p.y < -4) { p.y = canvas.height; p.x = Math.random() * canvas.width; }
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${p.alpha})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // ResizeObserver fires once the element has real layout dimensions
+  const ro = new ResizeObserver((entries) => {
+    const { width, height } = entries[0].contentRect;
+    canvas.width  = width;
+    canvas.height = height;
+    if (!started && width > 0 && height > 0) {
+      started = true;
+      spawnParticles();
+      tick();
+    }
+  });
+  ro.observe(hero);
+
+  window.addEventListener('resize', () => {
+    const r = hero.getBoundingClientRect();
+    canvas.width  = r.width;
+    canvas.height = r.height;
+  }, { passive: true });
+
+  // ── SCROLL REVEAL ──────────────────────────────────────────
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const el = entry.target as HTMLElement;
+        const delay = el.dataset.revealDelay ?? '0';
+        setTimeout(() => el.classList.add('revealed'), parseInt(delay));
+        observer.unobserve(el);
+      }
+    },
+    { threshold: 0.12 }
+  );
+
+  document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+</script>
