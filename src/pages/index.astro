@@ -7,6 +7,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <!-- ── HERO ──────────────────────────────────────────────── -->
   <section class="hero">
     <div class="hero-bg"></div>
+    <canvas id="hero-particles"></canvas>
     <div class="hero-content">
       <div class="hero-eyebrow">Piano · Lessons · Ottawa</div>
       <h1 class="hero-name">Dan Tremblay</h1>
@@ -350,12 +351,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     overflow: hidden;
   }
 
-  @keyframes kenburns {
-    0%   { transform: scale(1.12) translate(1%, 0.5%); }
-    50%  { transform: scale(1.06) translate(-0.5%, -0.5%); }
-    100% { transform: scale(1.12) translate(1%, 0.5%); }
-  }
-
   @keyframes heroFadeUp {
     from { opacity: 0; transform: translateY(18px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -367,8 +362,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     background-image: url('/images/piano.jpg');
     background-size: cover;
     background-position: center 30%;
-    animation: kenburns 28s ease-in-out infinite;
-    will-change: transform;
+  }
+
+  #hero-particles {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
   }
 
   .hero-bg::after {
@@ -920,3 +920,63 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
   }
 </style>
+
+<script>
+  const canvas = document.getElementById('hero-particles') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d')!;
+
+  function resize() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  interface Particle {
+    x: number; y: number;
+    vx: number; vy: number;
+    radius: number;
+    alpha: number;
+    alphaDir: number;
+  }
+
+  const COUNT = 70;
+  const particles: Particle[] = [];
+
+  for (let i = 0; i < COUNT; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.22,
+      vy: -Math.random() * 0.18 - 0.06,
+      radius: Math.random() * 1.8 + 0.4,
+      alpha: Math.random() * 0.35 + 0.05,
+      alphaDir: Math.random() < 0.5 ? 1 : -1,
+    });
+  }
+
+  function tick() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (const p of particles) {
+      p.x  += p.vx;
+      p.y  += p.vy;
+      p.alpha += p.alphaDir * 0.0008;
+
+      if (p.alpha > 0.4)  p.alphaDir = -1;
+      if (p.alpha < 0.03) p.alphaDir =  1;
+
+      if (p.x < 0) p.x = canvas.width;
+      if (p.x > canvas.width) p.x = 0;
+      if (p.y < -4) { p.y = canvas.height; p.x = Math.random() * canvas.width; }
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${p.alpha})`;
+      ctx.fill();
+    }
+
+    requestAnimationFrame(tick);
+  }
+  tick();
+</script>
