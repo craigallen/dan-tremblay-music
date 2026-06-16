@@ -943,14 +943,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   const ctx = canvas.getContext('2d')!;
   const hero = canvas.closest('.hero') as HTMLElement;
 
-  function resize() {
-    const r = hero.getBoundingClientRect();
-    canvas.width  = r.width;
-    canvas.height = r.height;
-  }
-  resize(); // synchronous — getBoundingClientRect works immediately
-  window.addEventListener('resize', resize, { passive: true });
-
   interface Particle {
     x: number; y: number;
     vx: number; vy: number;
@@ -960,44 +952,61 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   const COUNT = 110;
-  const particles: Particle[] = [];
+  let particles: Particle[] = [];
+  let started = false;
 
-  for (let i = 0; i < COUNT; i++) {
-    particles.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.22,
-      vy: -Math.random() * 0.18 - 0.06,
-      radius: Math.random() * 1.8 + 0.4,
-      alpha: Math.random() * 0.35 + 0.05,
-      alphaDir: Math.random() < 0.5 ? 1 : -1,
-    });
+  function spawnParticles() {
+    particles = [];
+    for (let i = 0; i < COUNT; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.22,
+        vy: -Math.random() * 0.18 - 0.06,
+        radius: Math.random() * 1.8 + 0.4,
+        alpha: Math.random() * 0.35 + 0.05,
+        alphaDir: Math.random() < 0.5 ? 1 : -1,
+      });
+    }
   }
 
   function tick() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     for (const p of particles) {
       p.x  += p.vx;
       p.y  += p.vy;
       p.alpha += p.alphaDir * 0.0008;
-
       if (p.alpha > 0.4)  p.alphaDir = -1;
       if (p.alpha < 0.03) p.alphaDir =  1;
-
       if (p.x < 0) p.x = canvas.width;
       if (p.x > canvas.width) p.x = 0;
       if (p.y < -4) { p.y = canvas.height; p.x = Math.random() * canvas.width; }
-
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(255,255,255,${p.alpha})`;
       ctx.fill();
     }
-
     requestAnimationFrame(tick);
   }
-  tick();
+
+  // ResizeObserver fires once the element has real layout dimensions
+  const ro = new ResizeObserver((entries) => {
+    const { width, height } = entries[0].contentRect;
+    canvas.width  = width;
+    canvas.height = height;
+    if (!started && width > 0 && height > 0) {
+      started = true;
+      spawnParticles();
+      tick();
+    }
+  });
+  ro.observe(hero);
+
+  window.addEventListener('resize', () => {
+    const r = hero.getBoundingClientRect();
+    canvas.width  = r.width;
+    canvas.height = r.height;
+  }, { passive: true });
 
   // ── SCROLL REVEAL ──────────────────────────────────────────
   const observer = new IntersectionObserver(
