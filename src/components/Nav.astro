@@ -1,7 +1,11 @@
 ---
+interface Props {
+  solidNav?: boolean;
+}
+const { solidNav = false } = Astro.props;
 ---
 
-<nav class="nav" id="nav">
+<nav class={`nav${solidNav ? ' is-scrolled' : ''}`} id="nav">
   <div class="nav-inner">
     <a href="/" class="nav-logo">
       <img src="/images/dt-white.png" alt="Dan Tremblay Music" width="44" height="44" />
@@ -155,20 +159,22 @@
   }
 </style>
 
-<script>
-  const nav = document.getElementById('nav')!;
-  nav.classList.add('is-scrolled');
+<script define:vars={{ solidNav }}>
+  const nav = document.getElementById('nav');
 
-  window.addEventListener(
-    'scroll',
-    () => {
-      nav.classList.toggle('is-scrolled', window.scrollY > 50);
-    },
-    { passive: true }
-  );
+  if (!solidNav) {
+    nav.classList.toggle('is-scrolled', window.scrollY > 50);
+    window.addEventListener(
+      'scroll',
+      () => {
+        nav.classList.toggle('is-scrolled', window.scrollY > 50);
+      },
+      { passive: true }
+    );
+  }
 
-  const hamburger = document.getElementById('hamburger')!;
-  const mobileMenu = document.getElementById('mobile-menu')!;
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
   hamburger.addEventListener('click', () => {
     mobileMenu.classList.toggle('open');
   });
