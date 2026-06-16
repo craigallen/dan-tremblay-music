@@ -1,0 +1,175 @@
+---
+---
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="/images/dt-white.png" alt="Dan Tremblay Music" width="44" height="44" />
+    </a>
+    <div class="nav-links">
+      <a href="/#lessons" class="nav-link">Lessons</a>
+      <a href="/#services" class="nav-link">Services</a>
+      <a href="/about" class="nav-link">About</a>
+      <a href="/contact" class="nav-btn">Book a Lesson</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="mobile-menu">
+    <a href="/#lessons" class="nav-link">Lessons</a>
+    <a href="/#services" class="nav-link">Services</a>
+    <a href="/about" class="nav-link">About</a>
+    <a href="/contact" class="nav-btn">Book a Lesson</a>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: 64px;
+    background: rgba(75, 94, 146, 0);
+    backdrop-filter: blur(0px);
+    transition: background 0.35s, backdrop-filter 0.35s, box-shadow 0.35s;
+  }
+
+  .nav.is-scrolled {
+    background: rgba(75, 94, 146, 0.97);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07);
+  }
+
+  .nav-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 64px);
+    height: 64px;
+    display: flex;
+    align-items: center;
+    gap: 36px;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .nav-logo img {
+    height: 44px;
+    width: 44px;
+    object-fit: contain;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-left: auto;
+  }
+
+  .nav-link {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.88);
+    letter-spacing: 0.01em;
+    transition: color 0.18s;
+  }
+
+  .nav-link:hover {
+    color: #fff;
+  }
+
+  .nav-btn {
+    padding: 9px 22px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: white;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: background 0.18s, border-color 0.18s;
+  }
+
+  .nav-btn:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .nav-hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    margin-left: auto;
+  }
+
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: white;
+    margin: 5px 0;
+    transition: 0.2s;
+  }
+
+  .nav-mobile {
+    display: none;
+    background: rgba(75, 94, 146, 0.98);
+    padding: 16px clamp(20px, 5vw, 64px) 20px;
+    flex-direction: column;
+    gap: 4px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-mobile .nav-link {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 17px;
+  }
+
+  .nav-mobile .nav-btn {
+    margin-top: 8px;
+    text-align: center;
+    display: block;
+  }
+
+  .nav-mobile.open {
+    display: flex;
+  }
+
+  @media (max-width: 640px) {
+    .nav-links {
+      display: none;
+    }
+    .nav-hamburger {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+  const nav = document.getElementById('nav')!;
+  nav.classList.add('is-scrolled');
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      nav.classList.toggle('is-scrolled', window.scrollY > 50);
+    },
+    { passive: true }
+  );
+
+  const hamburger = document.getElementById('hamburger')!;
+  const mobileMenu = document.getElementById('mobile-menu')!;
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+</script>
