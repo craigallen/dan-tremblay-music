@@ -944,11 +944,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   const hero = canvas.closest('.hero') as HTMLElement;
 
   function resize() {
-    canvas.width  = hero.offsetWidth;
-    canvas.height = hero.offsetHeight;
+    const r = hero.getBoundingClientRect();
+    canvas.width  = r.width;
+    canvas.height = r.height;
   }
-  // defer so layout is fully painted
-  requestAnimationFrame(resize);
+  resize(); // synchronous — getBoundingClientRect works immediately
   window.addEventListener('resize', resize, { passive: true });
 
   interface Particle {
@@ -964,8 +964,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   for (let i = 0; i < COUNT; i++) {
     particles.push({
-      x: Math.random() * (canvas.width  || window.innerWidth),
-      y: Math.random() * (canvas.height || window.innerHeight),
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
       vx: (Math.random() - 0.5) * 0.22,
       vy: -Math.random() * 0.18 - 0.06,
       radius: Math.random() * 1.8 + 0.4,
@@ -985,12 +985,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       if (p.alpha > 0.4)  p.alphaDir = -1;
       if (p.alpha < 0.03) p.alphaDir =  1;
 
-      if (p.x < 0) p.x = canvas.width  || window.innerWidth;
-      if (p.x > (canvas.width  || window.innerWidth))  p.x = 0;
-      if (p.y < -4) {
-        p.y = canvas.height || window.innerHeight;
-        p.x = Math.random() * (canvas.width || window.innerWidth);
-      }
+      if (p.x < 0) p.x = canvas.width;
+      if (p.x > canvas.width) p.x = 0;
+      if (p.y < -4) { p.y = canvas.height; p.x = Math.random() * canvas.width; }
 
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
