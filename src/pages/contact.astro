@@ -1,0 +1,423 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contact — Dan Tremblay Music"
+  description="Get in touch with Dan Tremblay for piano lessons, music production services, or live event bookings in Ottawa."
+  solidNav={true}
+>
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-content">
+      <div class="page-eyebrow">Get in Touch</div>
+      <h1 class="page-title">Contact</h1>
+    </div>
+  </section>
+
+  <!-- CONTACT FORM + SIDEBAR -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-grid">
+        <!-- FORM -->
+        <div>
+          <h2 class="form-title">Get In Touch</h2>
+          <p class="form-note">Fields marked with <span>*</span> are required.</p>
+          <form>
+            <div class="form-row">
+              <div class="field">
+                <label for="name">Name <span>*</span></label>
+                <input type="text" id="name" name="name" required autocomplete="name" />
+              </div>
+              <div class="field">
+                <label for="email">Email <span>*</span></label>
+                <input type="email" id="email" name="email" required autocomplete="email" />
+              </div>
+            </div>
+            <div class="field">
+              <label>What services are you interested in? <span>*</span></label>
+              <div class="checkbox-group">
+                <label class="checkbox-item">
+                  <input type="checkbox" name="service" value="lessons" /> Piano Lessons
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="service" value="production" /> Music Production
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="service" value="booking" /> Booking Dan Live
+                </label>
+              </div>
+            </div>
+            <div class="field">
+              <label for="message">Message <span>*</span></label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                placeholder="Tell me a bit about what you're looking for…"></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+          </form>
+        </div>
+
+        <!-- SIDEBAR -->
+        <div class="contact-sidebar">
+          <div class="sidebar-block">
+            <div class="sidebar-block-title">Contact Info</div>
+            <div class="info-item">
+              <span class="info-label">Location</span>
+              <span class="info-value">Stittsville, ON K2S 2G4<br />Canada</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Connect</span>
+            </div>
+            <div class="social-row">
+              <a
+                href="https://www.youtube.com/channel/UCRKCH91U2AhotO9nTlQP5OQ"
+                class="social-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube">YT</a
+              >
+              <a
+                href="https://dantremblay.bandcamp.com/releases"
+                class="social-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Bandcamp">BC</a
+              >
+              <a
+                href="https://music.apple.com/ca/artist/dan-tremblay/300050749"
+                class="social-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Apple Music">AM</a
+              >
+              <a
+                href="https://open.spotify.com/artist/16bKDJq0aG9k0W3N0y1qqe"
+                class="social-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Spotify">SP</a
+              >
+              <a
+                href="https://www.instagram.com/dantremblaymusic/"
+                class="social-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram">IG</a
+              >
+              <a
+                href="https://www.twitch.tv/dantremblaymusic"
+                class="social-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitch">TW</a
+              >
+            </div>
+          </div>
+          <div class="sidebar-block">
+            <div class="sidebar-block-title">Hours</div>
+            <div class="hours-list">
+              <div class="hour-row"><span class="hour-day">Monday</span><span>9 AM – 9 PM</span></div>
+              <div class="hour-row"><span class="hour-day">Tuesday</span><span>9 AM – 9 PM</span></div>
+              <div class="hour-row">
+                <span class="hour-day">Wednesday</span><span>9 AM – 9 PM</span>
+              </div>
+              <div class="hour-row">
+                <span class="hour-day">Thursday</span><span>9 AM – 9 PM</span>
+              </div>
+              <div class="hour-row"><span class="hour-day">Friday</span><span>9 AM – 6 PM</span></div>
+              <div class="hour-row">
+                <span class="hour-day">Saturday</span><span>10 AM – 2 PM</span>
+              </div>
+              <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* PAGE HERO */
+  .page-hero {
+    padding-top: 64px;
+    position: relative;
+    overflow: hidden;
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+  }
+  .page-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/piano.jpg');
+    background-size: cover;
+    background-position: center 40%;
+  }
+  .page-hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(5, 11, 27, 0.82) 0%, rgba(5, 11, 27, 0.68) 100%);
+  }
+  .page-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 56px clamp(20px, 5vw, 64px);
+    text-align: center;
+    width: 100%;
+  }
+  .page-eyebrow {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    color: rgba(255, 255, 255, 0.42);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+  }
+  .page-eyebrow::before,
+  .page-eyebrow::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.22);
+  }
+  .page-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(44px, 7vw, 80px);
+    font-weight: 300;
+    color: white;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  /* CONTACT SECTION */
+  .contact-section {
+    padding: 96px 0;
+    background: #eff5fc;
+  }
+  .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 64px);
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 72px;
+    align-items: start;
+  }
+
+  /* FORM */
+  .form-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: #0d1120;
+    margin-bottom: 6px;
+  }
+  .form-note {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 13px;
+    color: #5c6580;
+    margin-bottom: 32px;
+  }
+  .form-note span {
+    color: #c0392b;
+    font-weight: 600;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .field {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .field label {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #0d1120;
+    letter-spacing: 0.02em;
+  }
+  .field label span {
+    color: #c0392b;
+  }
+  .field input,
+  .field textarea {
+    padding: 11px 14px;
+    background: white;
+    border: 1px solid rgba(13, 17, 32, 0.1);
+    color: #0d1120;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.18s;
+    width: 100%;
+  }
+  .field input:focus,
+  .field textarea:focus {
+    border-color: #4b5e92;
+  }
+  .field textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.6;
+  }
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 14px;
+    color: #5c6580;
+    cursor: pointer;
+  }
+  .checkbox-item input {
+    width: 16px;
+    height: 16px;
+    accent-color: #4b5e92;
+    flex-shrink: 0;
+  }
+  .submit-btn {
+    padding: 14px 36px;
+    background: #4b5e92;
+    color: white;
+    border: none;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition:
+      background 0.18s,
+      transform 0.14s;
+    margin-top: 6px;
+  }
+  .submit-btn:hover {
+    background: #3d4e7a;
+    transform: translateY(-1px);
+  }
+
+  /* SIDEBAR */
+  .contact-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .sidebar-block {
+    padding: 28px;
+    background: white;
+    border: 1px solid rgba(13, 17, 32, 0.1);
+  }
+  .sidebar-block-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #0d1120;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(13, 17, 32, 0.1);
+  }
+  .info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 14px;
+  }
+  .info-label {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #4b5e92;
+  }
+  .info-value {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 14px;
+    color: #5c6580;
+    line-height: 1.6;
+  }
+  .hours-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .hour-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 13px;
+    color: #5c6580;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(13, 17, 32, 0.1);
+  }
+  .hour-row:last-child {
+    border-bottom: none;
+  }
+  .hour-day {
+    font-weight: 500;
+    color: #0d1120;
+  }
+  .social-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .social-link {
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(13, 17, 32, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #5c6580;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    transition:
+      border-color 0.18s,
+      color 0.18s,
+      background 0.18s;
+  }
+  .social-link:hover {
+    border-color: #4b5e92;
+    color: #4b5e92;
+    background: rgba(75, 94, 146, 0.06);
+  }
+
+  @media (max-width: 960px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+  @media (max-width: 640px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

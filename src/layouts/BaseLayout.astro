@@ -6,11 +6,13 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  solidNav?: boolean;
 }
 
 const {
   title,
   description = 'Award-winning piano instruction and music production in Stittsville, Ottawa.',
+  solidNav = false,
 } = Astro.props;
 ---
 
@@ -29,7 +31,7 @@ const {
     />
   </head>
   <body>
-    <Nav />
+    <Nav solidNav={solidNav} />
     <main>
       <slot />
     </main>
