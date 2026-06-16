@@ -28,7 +28,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="about" id="lessons">
     <div class="container">
       <div class="about-grid">
-        <div class="about-photo-wrap">
+        <div class="about-photo-wrap" data-reveal="left">
           <img
             src="/images/dan-tremblay.jpeg"
             alt="Dan Tremblay"
@@ -36,7 +36,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           />
           <div class="about-photo-accent"></div>
         </div>
-        <div class="about-content">
+        <div class="about-content" data-reveal="right">
           <span class="eyebrow">Based in Stittsville, Ottawa</span>
           <h2 class="section-h">About Dan</h2>
           <p class="about-body">
@@ -69,7 +69,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="offerings-bg"></div>
     <div class="container">
       <div class="offerings-grid">
-        <div class="offerings-content">
+        <div class="offerings-content" data-reveal="left">
           <div class="offerings-group">
             <h3 class="offerings-group-title">What I Offer</h3>
             <div class="check-list">
@@ -88,7 +88,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </div>
           </div>
         </div>
-        <div class="offerings-photo-wrap">
+        <div class="offerings-photo-wrap" data-reveal="right">
           <img
             src="/images/dan-teaching-piano.webp"
             alt="Dan teaching piano"
@@ -102,12 +102,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <!-- ── SERVICES ───────────────────────────────────────────── -->
   <section class="services" id="services">
     <div class="container">
-      <div class="services-header">
+      <div class="services-header" data-reveal="up">
         <span class="eyebrow">Beyond Lessons</span>
         <h2 class="section-h" style="margin-top:10px">Other Music Services</h2>
       </div>
       <div class="services-grid">
-        <a href="/production" class="service-card">
+        <a href="/production" class="service-card" data-reveal="up" data-reveal-delay="0">
           <div class="service-card-img">
             <img src="/images/dan-production.webp" alt="Music Production Services" />
           </div>
@@ -125,6 +125,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           target="_blank"
           rel="noopener noreferrer"
           class="service-card"
+          data-reveal="up"
+          data-reveal-delay="120"
         >
           <div class="service-card-img">
             <img src="/images/online-course-small.webp" alt="Online Piano Courses" />
@@ -138,7 +140,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <span class="service-card-link">Browse Courses</span>
           </div>
         </a>
-        <a href="/live" class="service-card">
+        <a href="/live" class="service-card" data-reveal="up" data-reveal-delay="240">
           <div class="service-card-img">
             <img src="/images/dan-live-small.webp" alt="Book Dan Live" />
           </div>
@@ -158,11 +160,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <!-- ── TESTIMONIALS ───────────────────────────────────────── -->
   <section class="testimonials">
     <div class="container">
-      <div class="testimonials-header">
+      <div class="testimonials-header" data-reveal="up">
         <span class="eyebrow">What Students Say</span>
         <h2 class="section-h" style="margin-top:10px">Testimonials</h2>
       </div>
-      <div class="featured-quote">
+      <div class="featured-quote" data-reveal="up" data-reveal-delay="100">
         <span class="quote-opener">"</span>
         <p class="quote-text">
           Dan Tremblay has taught our daughter since she was a young child, instilling
@@ -174,7 +176,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <p class="quote-attr">— William F.</p>
       </div>
       <div class="reviews-grid">
-        <div class="review-card">
+        <div class="review-card" data-reveal="up" data-reveal-delay="0">
           <div class="review-header">
             <div class="review-av">L</div>
             <div>
@@ -192,7 +194,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <span class="google-g">G</span> Google Review
           </div>
         </div>
-        <div class="review-card">
+        <div class="review-card" data-reveal="up" data-reveal-delay="120">
           <div class="review-header">
             <div class="review-av" style="background:#5a8c6b">K</div>
             <div>
@@ -210,7 +212,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <span class="google-g">G</span> Google Review
           </div>
         </div>
-        <div class="review-card">
+        <div class="review-card" data-reveal="up" data-reveal-delay="240">
           <div class="review-header">
             <div class="review-av" style="background:#8c6b5a">J</div>
             <div>
@@ -876,6 +878,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     line-height: 1.2;
   }
 
+  /* ── SCROLL REVEAL ───────────────────────────────────── */
+  [data-reveal] {
+    opacity: 0;
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  [data-reveal="up"]    { transform: translateY(32px); }
+  [data-reveal="left"]  { transform: translateX(-32px); }
+  [data-reveal="right"] { transform: translateX(32px); }
+
+  [data-reveal].revealed {
+    opacity: 1;
+    transform: none;
+  }
+
   /* ── RESPONSIVE ──────────────────────────────────────── */
   @media (max-width: 960px) {
     .about-grid,
@@ -979,4 +996,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     requestAnimationFrame(tick);
   }
   tick();
+
+  // ── SCROLL REVEAL ──────────────────────────────────────────
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const el = entry.target as HTMLElement;
+        const delay = el.dataset.revealDelay ?? '0';
+        setTimeout(() => el.classList.add('revealed'), parseInt(delay));
+        observer.unobserve(el);
+      }
+    },
+    { threshold: 0.12 }
+  );
+
+  document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
 </script>
