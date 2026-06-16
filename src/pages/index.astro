@@ -350,12 +350,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     overflow: hidden;
   }
 
+  @keyframes kenburns {
+    0%   { transform: scale(1.12) translate(1%, 0.5%); }
+    50%  { transform: scale(1.06) translate(-0.5%, -0.5%); }
+    100% { transform: scale(1.12) translate(1%, 0.5%); }
+  }
+
+  @keyframes heroFadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
   .hero-bg {
     position: absolute;
     inset: 0;
     background-image: url('/images/piano.jpg');
     background-size: cover;
     background-position: center 30%;
+    animation: kenburns 28s ease-in-out infinite;
+    will-change: transform;
   }
 
   .hero-bg::after {
@@ -390,6 +403,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     align-items: center;
     justify-content: center;
     gap: 14px;
+    opacity: 0;
+    animation: heroFadeUp 0.9s ease forwards 0.3s;
   }
 
   .hero-eyebrow::before,
@@ -410,6 +425,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     line-height: 0.92;
     text-transform: uppercase;
     margin-bottom: 22px;
+    opacity: 0;
+    animation: heroFadeUp 1s ease forwards 0.65s;
   }
 
   .hero-rule {
@@ -417,6 +434,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     height: 1px;
     background: rgba(255, 255, 255, 0.28);
     margin: 0 auto 22px;
+    opacity: 0;
+    animation: heroFadeUp 0.9s ease forwards 1s;
   }
 
   .hero-title {
@@ -426,6 +445,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-style: italic;
     color: rgba(255, 255, 255, 0.82);
     margin-bottom: 10px;
+    opacity: 0;
+    animation: heroFadeUp 0.9s ease forwards 1.15s;
   }
 
   .hero-sub {
@@ -435,6 +456,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: rgba(255, 255, 255, 0.5);
     margin-bottom: 42px;
     line-height: 1.7;
+    opacity: 0;
+    animation: heroFadeUp 0.9s ease forwards 1.3s;
   }
 
   .hero-actions {
@@ -442,6 +465,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     gap: 14px;
     justify-content: center;
     flex-wrap: wrap;
+    opacity: 0;
+    animation: heroFadeUp 0.9s ease forwards 1.5s;
   }
 
   /* ── ABOUT ───────────────────────────────────────────── */
