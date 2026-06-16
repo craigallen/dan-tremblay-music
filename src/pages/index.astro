@@ -941,13 +941,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <script>
   const canvas = document.getElementById('hero-particles') as HTMLCanvasElement;
   const ctx = canvas.getContext('2d')!;
+  const hero = canvas.closest('.hero') as HTMLElement;
 
   function resize() {
-    canvas.width  = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
+    canvas.width  = hero.offsetWidth;
+    canvas.height = hero.offsetHeight;
   }
-  resize();
-  window.addEventListener('resize', resize);
+  // defer so layout is fully painted
+  requestAnimationFrame(resize);
+  window.addEventListener('resize', resize, { passive: true });
 
   interface Particle {
     x: number; y: number;
@@ -957,13 +959,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     alphaDir: number;
   }
 
-  const COUNT = 70;
+  const COUNT = 110;
   const particles: Particle[] = [];
 
   for (let i = 0; i < COUNT; i++) {
     particles.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
+      x: Math.random() * (canvas.width  || window.innerWidth),
+      y: Math.random() * (canvas.height || window.innerHeight),
       vx: (Math.random() - 0.5) * 0.22,
       vy: -Math.random() * 0.18 - 0.06,
       radius: Math.random() * 1.8 + 0.4,
@@ -983,9 +985,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       if (p.alpha > 0.4)  p.alphaDir = -1;
       if (p.alpha < 0.03) p.alphaDir =  1;
 
-      if (p.x < 0) p.x = canvas.width;
-      if (p.x > canvas.width) p.x = 0;
-      if (p.y < -4) { p.y = canvas.height; p.x = Math.random() * canvas.width; }
+      if (p.x < 0) p.x = canvas.width  || window.innerWidth;
+      if (p.x > (canvas.width  || window.innerWidth))  p.x = 0;
+      if (p.y < -4) {
+        p.y = canvas.height || window.innerHeight;
+        p.x = Math.random() * (canvas.width || window.innerWidth);
+      }
 
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
