@@ -177,13 +177,26 @@ const { solidNav = false } = Astro.props;
     display: flex;
     align-items: center;
     gap: 4px;
-    padding: 0;
+    padding: 4px 2px;
+    border-radius: 4px;
+  }
+
+  .nav-dropdown-toggle:focus-visible,
+  .nav-link:focus-visible,
+  .nav-btn:focus-visible,
+  .nav-hamburger:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.85);
+    outline-offset: 3px;
+    border-radius: 4px;
   }
 
   .nav-chevron {
-    font-size: 10px;
-    transition: transform 0.18s;
+    font-size: 16px;
+    line-height: 1;
+    transition: transform 0.22s ease;
     display: inline-block;
+    margin-left: 2px;
+    vertical-align: middle;
   }
 
   .nav-dropdown-toggle[aria-expanded='true'] .nav-chevron {
