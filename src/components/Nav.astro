@@ -12,7 +12,16 @@ const { solidNav = false } = Astro.props;
     </a>
     <div class="nav-links">
       <a href="/about" class="nav-link">About</a>
-      <a href="/#services" class="nav-link">Services</a>
+      <div class="nav-dropdown">
+        <button class="nav-link nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+          Services <span class="nav-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="nav-dropdown-menu" role="menu">
+          <a href="/production" class="nav-dropdown-item" role="menuitem">Music Production</a>
+          <a href="/live" class="nav-dropdown-item" role="menuitem">Book Dan Live</a>
+          <a href="https://dan-s-site-8ede.thinkific.com/collections" class="nav-dropdown-item" role="menuitem" target="_blank" rel="noopener noreferrer">Online Courses</a>
+        </div>
+      </div>
       <a href="https://dantremblay.bandcamp.com/" class="nav-link" target="_blank" rel="noopener noreferrer">Discography</a>
       <a href="/contact" class="nav-btn">Book a Lesson</a>
     </div>
@@ -22,7 +31,14 @@ const { solidNav = false } = Astro.props;
   </div>
   <div class="nav-mobile" id="mobile-menu">
     <a href="/about" class="nav-link">About</a>
-    <a href="/#services" class="nav-link">Services</a>
+    <div class="nav-mobile-group">
+      <span class="nav-link nav-mobile-label">Services</span>
+      <div class="nav-mobile-sub">
+        <a href="/production" class="nav-link nav-mobile-sub-link">Music Production</a>
+        <a href="/live" class="nav-link nav-mobile-sub-link">Book Dan Live</a>
+        <a href="https://dan-s-site-8ede.thinkific.com/collections" class="nav-link nav-mobile-sub-link" target="_blank" rel="noopener noreferrer">Online Courses</a>
+      </div>
+    </div>
     <a href="https://dantremblay.bandcamp.com/" class="nav-link" target="_blank" rel="noopener noreferrer">Discography</a>
     <a href="/contact" class="nav-btn">Book a Lesson</a>
   </div>
@@ -149,6 +165,103 @@ const { solidNav = false } = Astro.props;
     display: flex;
   }
 
+  /* DROPDOWN */
+  .nav-dropdown {
+    position: relative;
+  }
+
+  .nav-dropdown-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0;
+  }
+
+  .nav-chevron {
+    font-size: 10px;
+    transition: transform 0.18s;
+    display: inline-block;
+  }
+
+  .nav-dropdown-toggle[aria-expanded='true'] .nav-chevron {
+    transform: rotate(180deg);
+  }
+
+  .nav-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 18px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 180px;
+    background: rgba(75, 94, 146, 0.97);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(5, 11, 27, 0.25);
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(-4px);
+    transition:
+      opacity 0.18s,
+      transform 0.18s;
+  }
+
+  .nav-dropdown-menu.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .nav-dropdown-item {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.82);
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    transition: background 0.14s, color 0.14s;
+    white-space: nowrap;
+  }
+
+  .nav-dropdown-item:last-child {
+    border-bottom: none;
+  }
+
+  .nav-dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+
+  /* MOBILE SUB-LINKS */
+  .nav-mobile-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-mobile-label {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 17px;
+  }
+
+  .nav-mobile-sub {
+    display: flex;
+    flex-direction: column;
+    padding-left: 16px;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-mobile-sub-link {
+    font-size: 15px !important;
+    padding: 9px 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  }
+
   @media (max-width: 640px) {
     .nav-links {
       display: none;
@@ -178,4 +291,22 @@ const { solidNav = false } = Astro.props;
   hamburger.addEventListener('click', () => {
     mobileMenu.classList.toggle('open');
   });
+
+  const dropdownToggle = document.querySelector('.nav-dropdown-toggle');
+  const dropdownMenu = document.querySelector('.nav-dropdown-menu');
+
+  if (dropdownToggle && dropdownMenu) {
+    dropdownToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dropdownMenu.classList.toggle('open');
+      dropdownToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    document.addEventListener('click', () => {
+      dropdownMenu.classList.remove('open');
+      dropdownToggle.setAttribute('aria-expanded', 'false');
+    });
+
+    dropdownMenu.addEventListener('click', (e) => e.stopPropagation());
+  }
 </script>
