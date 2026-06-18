@@ -14,7 +14,7 @@ const { solidNav = false } = Astro.props;
       <a href="/about" class="nav-link">About</a>
       <div class="nav-dropdown">
         <button class="nav-link nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
-          Services <span class="nav-chevron" aria-hidden="true">▾</span>
+          Services <svg class="nav-chevron" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 5L7 9.5L11.5 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="nav-dropdown-menu" role="menu">
           <a href="/production" class="nav-dropdown-item" role="menuitem">Music Production</a>
@@ -191,12 +191,13 @@ const { solidNav = false } = Astro.props;
   }
 
   .nav-chevron {
-    font-size: 16px;
-    line-height: 1;
+    width: 16px;
+    height: 16px;
     transition: transform 0.22s ease;
     display: inline-block;
-    margin-left: 2px;
-    vertical-align: middle;
+    margin-left: 3px;
+    flex-shrink: 0;
+    transform-origin: center center;
   }
 
   .nav-dropdown-toggle[aria-expanded='true'] .nav-chevron {
