@@ -52,27 +52,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <span class="eyebrow">Listen</span>
         <h2 class="section-h" style="text-align:center;margin-top:10px">Production Work</h2>
       </div>
-      <div class="portfolio-grid">
-        <div class="portfolio-item">
-          <div class="portfolio-video">
-            <iframe
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-              title="Production Work Sample 1"
-              allowfullscreen
-              loading="lazy"></iframe>
-          </div>
-          <div class="portfolio-label">Cinematic Composition Sample</div>
-        </div>
-        <div class="portfolio-item">
-          <div class="portfolio-video">
-            <iframe
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-              title="Production Work Sample 2"
-              allowfullscreen
-              loading="lazy"></iframe>
-          </div>
-          <div class="portfolio-label">Ambient / Electronic Production</div>
-        </div>
+      <div class="spotify-embed-wrap">
+        <iframe
+          src="https://open.spotify.com/embed/playlist/6AOsg7dyA8fPlLFxPN1exh"
+          width="100%"
+          height="380"
+          frameborder="0"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          title="Dan Tremblay — Production Playlist"></iframe>
       </div>
     </div>
   </section>
@@ -317,40 +305,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     text-align: center;
     margin-bottom: 48px;
   }
-  .portfolio-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
-  .portfolio-item {
-    background: #eff5fc;
+  .spotify-embed-wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    border-radius: 12px;
     overflow: hidden;
-    border: 1px solid rgba(13, 17, 32, 0.1);
-    transition: box-shadow 0.2s;
-  }
-  .portfolio-item:hover {
-    box-shadow: 0 6px 28px rgba(5, 11, 27, 0.09);
-  }
-  .portfolio-video {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    background: #050b1b;
-  }
-  .portfolio-video iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-  .portfolio-label {
-    padding: 16px 20px;
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 17px;
-    font-weight: 600;
-    color: #0d1120;
   }
 
   /* PROJECT TYPES */
@@ -447,10 +406,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       grid-template-columns: 1fr;
       gap: 40px;
     }
-    .portfolio-grid {
-      grid-template-columns: 1fr;
-    }
-    .projects-grid {
+.projects-grid {
       grid-template-columns: 1fr 1fr;
     }
   }
