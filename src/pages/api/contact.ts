@@ -29,8 +29,8 @@ export const POST: APIRoute = async ({ request }) => {
   const serviceList = services.length > 0 ? services.join(', ') : 'None selected';
 
   const { data: sent, error } = await resend.emails.send({
-    from: import.meta.env.RESEND_FROM_EMAIL ?? 'onboarding@resend.dev',
-    to: 'dantremblaymusic@gmail.com',
+    from: import.meta.env.RESEND_FROM_EMAIL ?? 'contact@dantremblaymusic.com',
+    to: 'contact@dantremblaymusic.com',
     replyTo: email,
     subject: `New contact form submission from ${name}`,
     html: `
