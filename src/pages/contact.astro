@@ -84,18 +84,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                   method: 'POST',
                   body: new FormData(form),
                 });
-                const json = await res.json();
+                let payload: { success?: boolean; error?: string } = {};
+                try { payload = await res.json(); } catch { /* non-JSON response */ }
 
-                if (res.ok && json.success) {
+                if (res.ok && payload.success) {
                   form.style.display = 'none';
                   successEl.style.display = 'flex';
                 } else {
-                  errorEl.querySelector('p')!.textContent = json.error || 'Something went wrong. Please try again.';
+                  errorEl.querySelector('p')!.textContent = payload.error || 'Something went wrong. Please try again.';
                   errorEl.style.display = 'block';
                   submitBtn.disabled = false;
                   submitBtn.textContent = 'Send Message';
                 }
               } catch {
+                errorEl.querySelector('p')!.textContent = 'Something went wrong. Please try again.';
                 errorEl.style.display = 'block';
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Send Message';
