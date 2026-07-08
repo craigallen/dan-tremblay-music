@@ -32,6 +32,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <p>Something went wrong. Please try again or email directly.</p>
           </div>
           <form id="contact-form" method="POST" action="/api/contact">
+            <div class="honeypot" aria-hidden="true">
+              <label for="website">Leave this blank</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+            </div>
             <div class="form-row">
               <div class="field">
                 <label for="name">Name <span>*</span></label>
@@ -218,6 +222,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     letter-spacing: 0.18em;
     text-transform: uppercase;
     line-height: 1;
+  }
+
+  /* Honeypot — hidden from real users, traps bots */
+  .honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
   }
 
   /* CONTACT SECTION */

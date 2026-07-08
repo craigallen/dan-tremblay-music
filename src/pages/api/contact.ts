@@ -7,9 +7,20 @@ const json = (body: object, status = 200) =>
     headers: { 'Content-Type': 'application/json' },
   });
 
+const escapeHtml = (s: string) =>
+  s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export const POST: APIRoute = async ({ request }) => {
   try {
     const data = await request.formData();
+
+    // Honeypot: bots fill this, humans don't
+    const honeypot = data.get('website')?.toString() ?? '';
+    if (honeypot) {
+      return json({ success: true });
+    }
 
     const name = data.get('name')?.toString().trim();
     const email = data.get('email')?.toString().trim();
@@ -18,6 +29,10 @@ export const POST: APIRoute = async ({ request }) => {
 
     if (!name || !email || !message) {
       return json({ error: 'Please fill in all required fields.' }, 400);
+    }
+
+    if (!EMAIL_RE.test(email)) {
+      return json({ error: 'Please enter a valid email address.' }, 400);
     }
 
     const apiKey = import.meta.env.RESEND_API_KEY;
@@ -29,18 +44,23 @@ export const POST: APIRoute = async ({ request }) => {
     const resend = new Resend(apiKey);
     const serviceList = services.length > 0 ? services.join(', ') : 'None selected';
 
+    const safeName = escapeHtml(name);
+    const safeEmail = escapeHtml(email);
+    const safeServices = escapeHtml(serviceList);
+    const safeMessage = escapeHtml(message).replace(/\n/g, '<br>');
+
     const { data: sent, error } = await resend.emails.send({
       from: 'Dan Tremblay Music <noreply@dantremblaymusic.com>',
       to: 'dantremblaymusic@gmail.com',
-      replyTo: `${name} <${email}>`,
-      subject: `New contact form submission from ${name}`,
+      replyTo: `${safeName} <${safeEmail}>`,
+      subject: `New contact form submission from ${safeName}`,
       html: `
         <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-        <p><strong>Services:</strong> ${serviceList}</p>
+        <p><strong>Name:</strong> ${safeName}</p>
+        <p><strong>Email:</strong> <a href="mailto:${safeEmail}">${safeEmail}</a></p>
+        <p><strong>Services:</strong> ${safeServices}</p>
         <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
+        <p>${safeMessage}</p>
       `,
     });
 
