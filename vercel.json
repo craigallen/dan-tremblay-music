@@ -1,0 +1,32 @@
+{
+  "redirects": [
+    { "source": "/about/", "destination": "/about", "permanent": true },
+    { "source": "/contact/", "destination": "/contact", "permanent": true },
+    { "source": "/live/", "destination": "/live", "permanent": true },
+    { "source": "/production/", "destination": "/production", "permanent": true },
+    { "source": "/sitemap/", "destination": "/", "permanent": true },
+    { "source": "/production/music-for-bands/", "destination": "/production", "permanent": true },
+    { "source": "/production/media-productions/", "destination": "/production", "permanent": true },
+    { "source": "/production/dan-akai/", "destination": "/production", "permanent": true },
+    { "source": "/home/dan-akai-2/", "destination": "/", "permanent": true },
+    { "source": "/home/dan-headphones/", "destination": "/", "permanent": true },
+    { "source": "/home/dan-live-small/", "destination": "/", "permanent": true },
+    { "source": "/home/dan-mic/", "destination": "/", "permanent": true },
+    { "source": "/home/dan-production/", "destination": "/", "permanent": true },
+    { "source": "/home/dan-teaching-piano-student/", "destination": "/", "permanent": true },
+    { "source": "/home/dan-tremblay-dambient-sketches-v1/", "destination": "/", "permanent": true },
+    { "source": "/home/dan-tremblay-danbient-sketches-v2/", "destination": "/", "permanent": true },
+    { "source": "/home/dan-tremblay-dark-water-pulse/", "destination": "/", "permanent": true },
+    { "source": "/home/dan-tremblay-glacial-drift/", "destination": "/", "permanent": true },
+    { "source": "/home/dan-tremblay-sunset-echoes/", "destination": "/", "permanent": true },
+    { "source": "/home/dan-tremblay/", "destination": "/", "permanent": true },
+    { "source": "/home/online-course-small/", "destination": "/", "permanent": true },
+    { "source": "/home/online-course/", "destination": "/", "permanent": true },
+    { "source": "/home/piano-lesson/", "destination": "/", "permanent": true },
+    { "source": "/home/piano-lessons-small/", "destination": "/", "permanent": true },
+    { "source": "/home/piano-lessons/", "destination": "/", "permanent": true },
+    { "source": "/home/piano/", "destination": "/", "permanent": true },
+    { "source": "/home/production-services-small/", "destination": "/", "permanent": true },
+    { "source": "/home/production-services/", "destination": "/", "permanent": true }
+  ]
+}
