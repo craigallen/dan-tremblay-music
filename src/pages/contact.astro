@@ -20,94 +20,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="contact-section">
     <div class="container">
       <div class="contact-grid">
-        <!-- FORM -->
+        <!-- FORM (temporarily replaced with direct email while DNS propagates) -->
         <div>
           <h2 class="form-title">Get In Touch</h2>
-          <p class="form-note">Fields marked with <span>*</span> are required.</p>
-          <div id="form-success" class="form-success" style="display:none">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            <p>Thank you! Your message has been sent. Dan will be in touch soon.</p>
-          </div>
-          <div id="form-error" class="form-error" style="display:none">
-            <p>Something went wrong. Please try again or email directly.</p>
-          </div>
-          <form id="contact-form" method="POST" action="/api/contact">
-            <div class="honeypot" aria-hidden="true">
-              <label for="website">Leave this blank</label>
-              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
-            </div>
-            <div class="form-row">
-              <div class="field">
-                <label for="name">Name <span>*</span></label>
-                <input type="text" id="name" name="name" required autocomplete="name" />
-              </div>
-              <div class="field">
-                <label for="email">Email <span>*</span></label>
-                <input type="email" id="email" name="email" required autocomplete="email" />
-              </div>
-            </div>
-            <div class="field">
-              <label>What services are you interested in? <span>*</span></label>
-              <div class="checkbox-group">
-                <label class="checkbox-item">
-                  <input type="checkbox" name="service" value="lessons" /> Piano Lessons
-                </label>
-                <label class="checkbox-item">
-                  <input type="checkbox" name="service" value="production" /> Music Production
-                </label>
-                <label class="checkbox-item">
-                  <input type="checkbox" name="service" value="booking" /> Booking Dan Live
-                </label>
-              </div>
-            </div>
-            <div class="field">
-              <label for="message">Message <span>*</span></label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                placeholder="Tell me a bit about what you're looking for…"></textarea>
-            </div>
-            <button type="submit" class="submit-btn" id="submit-btn">Send Message</button>
-          </form>
-
-          <script>
-            const form = document.getElementById('contact-form') as HTMLFormElement;
-            const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
-            const successEl = document.getElementById('form-success') as HTMLElement;
-            const errorEl = document.getElementById('form-error') as HTMLElement;
-
-            form.addEventListener('submit', async (e) => {
-              e.preventDefault();
-              errorEl.style.display = 'none';
-              submitBtn.disabled = true;
-              submitBtn.textContent = 'Sending…';
-
-              try {
-                const res = await fetch('/api/contact', {
-                  method: 'POST',
-                  body: new FormData(form),
-                });
-                let payload: { success?: boolean; error?: string } = {};
-                try { payload = await res.json(); } catch { /* non-JSON response */ }
-
-                if (res.ok && payload.success) {
-                  form.style.display = 'none';
-                  successEl.style.display = 'flex';
-                } else {
-                  errorEl.querySelector('p')!.textContent = payload.error || 'Something went wrong. Please try again.';
-                  errorEl.style.display = 'block';
-                  submitBtn.disabled = false;
-                  submitBtn.textContent = 'Send Message';
-                }
-              } catch {
-                errorEl.querySelector('p')!.textContent = 'Something went wrong. Please try again.';
-                errorEl.style.display = 'block';
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Send Message';
-              }
-            });
-          </script>
+          <p class="form-note">The contact form is temporarily unavailable. Please reach out by email instead.</p>
+          <a href="mailto:dantremblaymusic@gmail.com" class="submit-btn email-link">Email dantremblaymusic@gmail.com</a>
         </div>
 
         <!-- SIDEBAR -->
@@ -224,15 +141,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     line-height: 1;
   }
 
-  /* Honeypot — hidden from real users, traps bots */
-  .honeypot {
-    position: absolute;
-    left: -9999px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-  }
-
   /* CONTACT SECTION */
   .contact-section {
     padding: 96px 0;
@@ -268,74 +176,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: #c0392b;
     font-weight: 600;
   }
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-  }
-  .field {
-    margin-bottom: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .field label {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    color: #0d1120;
-    letter-spacing: 0.02em;
-  }
-  .field label span {
-    color: #c0392b;
-  }
-  .field input,
-  .field textarea {
-    padding: 11px 14px;
-    background: white;
-    border: 1px solid rgba(13, 17, 32, 0.1);
-    color: #0d1120;
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 16px;
-    outline: none;
-    transition: border-color 0.18s;
-    width: 100%;
-  }
-  .field input:focus,
-  .field textarea:focus {
-    border-color: #4b5e92;
-  }
-  .field textarea {
-    resize: vertical;
-    min-height: 120px;
-    line-height: 1.6;
-  }
-  .checkbox-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 4px;
-  }
-  .checkbox-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 16px;
-    color: #5c6580;
-    cursor: pointer;
-  }
-  .checkbox-item input {
-    width: 16px;
-    height: 16px;
-    accent-color: #4b5e92;
-    flex-shrink: 0;
-  }
   .submit-btn {
+    display: inline-block;
     padding: 14px 36px;
     background: #4b5e92;
     color: white;
     border: none;
+    text-decoration: none;
     font-family: 'DM Sans', system-ui, sans-serif;
     font-size: 16px;
     font-weight: 500;
@@ -355,40 +202,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     cursor: not-allowed;
     transform: none;
   }
-  .form-success {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    padding: 24px;
-    background: #eaf4ee;
-    border: 1px solid #a3d4b0;
-    color: #1e5c32;
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 24px;
-  }
-  .form-success svg {
-    flex-shrink: 0;
-    margin-top: 2px;
-    color: #2d8c4e;
-  }
-  .form-success p {
-    margin: 0;
-  }
-  .form-error {
-    padding: 14px 18px;
-    background: #fdf0ef;
-    border: 1px solid #e8a9a3;
-    color: #8c1f1a;
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 15px;
-    margin-bottom: 18px;
-  }
-  .form-error p {
-    margin: 0;
-  }
-
   /* SIDEBAR */
   .contact-sidebar {
     display: flex;
@@ -476,11 +289,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .contact-grid {
       grid-template-columns: 1fr;
       gap: 48px;
-    }
-  }
-  @media (max-width: 640px) {
-    .form-row {
-      grid-template-columns: 1fr;
     }
   }
 </style>
