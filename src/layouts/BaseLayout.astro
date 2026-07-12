@@ -30,6 +30,23 @@ const {
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
       rel="stylesheet"
     />
+    {Astro.site && <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />}
+    {
+      import.meta.env.PROD && (
+        <>
+          <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-3NPXK39CYT"
+          ></script>
+          <script is:inline>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'G-3NPXK39CYT');
+          </script>
+        </>
+      )
+    }
   </head>
   <body>
     <Nav solidNav={solidNav} />
