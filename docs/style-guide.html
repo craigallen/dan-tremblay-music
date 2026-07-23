@@ -391,89 +391,6 @@
   /* channel mocks */
   .channel-body { display: grid; grid-template-columns: 1.1fr 1fr; gap: 34px; align-items: start; margin-top: 24px; }
   .channel-body.stack { grid-template-columns: 1fr; }
-  .mock-frame {
-    background: var(--surface);
-    border: 1px solid var(--hairline);
-    border-radius: 12px;
-    padding: 14px;
-    box-shadow: var(--shadow);
-  }
-  .mock-canvas {
-    position: relative;
-    border-radius: 6px;
-    overflow: hidden;
-    background:
-      radial-gradient(ellipse at 28% 18%, rgba(120, 140, 200, .38), transparent 58%),
-      linear-gradient(160deg, #0b1530 0%, #050B1B 62%, #071129 100%);
-    color: #fff;
-  }
-  .mock-canvas.thumb { aspect-ratio: 16 / 9; }
-  .mock-canvas.square { aspect-ratio: 1 / 1; max-width: 340px; margin: 0 auto; }
-  .mock-safe {
-    position: absolute;
-    inset: 6%;
-    border: 1px dashed rgba(255, 255, 255, .22);
-    pointer-events: none;
-  }
-  .mock-eyebrow {
-    position: absolute;
-    top: 8%;
-    left: 7%;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: .24em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, .68);
-  }
-  .mock-title {
-    position: absolute;
-    left: 7%;
-    bottom: 14%;
-    right: 30%;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: .03em;
-    font-size: clamp(22px, 3.4vw, 34px);
-    line-height: 1.04;
-  }
-  .mock-rule {
-    position: absolute;
-    left: 7%;
-    bottom: 10.5%;
-    width: 48px;
-    height: 2px;
-    background: var(--accent-2, #93A6DA);
-  }
-  .mock-bug { position: absolute; bottom: 6%; right: 6%; width: 34px; height: 34px; opacity: .82; }
-  .mock-bug .mark-img { width: 100%; height: 100%; }
-  .square .mock-title { position: static; text-align: center; }
-  .square-inner {
-    position: absolute; inset: 0;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
-    padding: 10%;
-    text-align: center;
-  }
-  .square-inner .mark-img { width: 54px; height: 54px; }
-  .square-inner .mock-title { font-size: clamp(20px, 4vw, 26px); }
-  .mock-caption {
-    margin-top: 14px;
-    font-size: 13.5px;
-    color: var(--ink-soft);
-    background: var(--accent-soft);
-    padding: 12px 14px;
-    border-radius: 8px;
-  }
-  .mock-caption b { color: var(--ink); }
-
-  .title-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-  .title-chip {
-    font-size: 13px;
-    padding: 7px 13px;
-    border: 1px solid var(--hairline);
-    border-radius: 20px;
-    color: var(--ink-soft);
-  }
 
   /* email mock */
   .email-mock { background: var(--canvas); border: 1px solid var(--hairline); border-radius: 8px; overflow: hidden; }
@@ -558,8 +475,6 @@
       <a class="navlink" href="#color">Color</a>
       <a class="navlink" href="#type">Typography</a>
       <a class="navlink" href="#voice">Voice &amp; Tone</a>
-      <a class="navlink" href="#youtube">YouTube Thumbnails</a>
-      <a class="navlink" href="#social">Social Media</a>
       <a class="navlink" href="#email">Email Newsletters</a>
       <a class="navlink" href="#reference">Quick Reference</a>
     </nav>
@@ -570,7 +485,7 @@
     <div class="masthead">
       <span class="eyebrow">Brand &amp; Content Style Guide</span>
       <h1>Dan Tremblay Music</h1>
-      <p class="sub">One consistent visual system for lessons, thumbnails, posts, and newsletters.</p>
+      <p class="sub">One consistent visual system for lessons and email newsletters.</p>
       <div class="meta">v1.0 — Prepared July 2026</div>
     </div>
 
@@ -579,8 +494,8 @@
         <span class="section-num">01</span>
         <h2>Brand at a Glance</h2>
       </div>
-      <p>Dan Tremblay Music sits at the intersection of two credible things: thirty years of award&#8209;winning piano instruction, and an active career composing and producing music licensed worldwide. Every piece of content — a lesson thumbnail, a Twitch clip, a newsletter — should read as <em>both</em> at once: a teacher parents trust, and a working musician whose ear you'd trust too.</p>
-      <p>That's the whole brief. Nothing below exists to make things prettier for its own sake — it exists so a thumbnail made in a hurry on Tuesday still looks like it belongs next to the site.</p>
+      <p>Dan Tremblay Music sits at the intersection of two credible things: thirty years of award&#8209;winning piano instruction, and an active career composing and producing music licensed worldwide. Every piece of content — a lesson page, a newsletter — should read as <em>both</em> at once: a teacher parents trust, and a working musician whose ear you'd trust too.</p>
+      <p>That's the whole brief. Nothing below exists to make things prettier for its own sake — it exists so a newsletter put together in a hurry still looks like it belongs next to the site.</p>
       <p class="pull">The score becomes the sound.</p>
     </section>
 
@@ -685,64 +600,9 @@
       </div>
     </section>
 
-    <section id="youtube">
-      <div class="section-head">
-        <span class="section-num">06</span>
-        <h2>YouTube Thumbnails</h2>
-      </div>
-      <p>1280×720. One idea, two to four words, set in Cormorant Garamond over the ink gradient the site already uses on the hero. A short brand-blue rule anchors the title; the mark sits small in the corner as a bug — never a full-color badge or a arrow-and-circle callout.</p>
-      <div class="channel-body">
-        <div class="mock-frame">
-          <div class="mock-canvas thumb">
-            <div class="mock-safe"></div>
-            <div class="mock-eyebrow">Piano Lesson</div>
-            <div class="mock-title">Improvise Over<br/>Any Chord</div>
-            <div class="mock-rule"></div>
-            <div class="mock-bug"><img class="mark-img" src="data:image/png;base64,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" alt="" width="50" height="50" /></div>
-          </div>
-          <p class="caption">Dashed line marks the title-safe area — keep text and the bug inside it.</p>
-        </div>
-        <div>
-          <h3>Title patterns</h3>
-          <p style="max-width:none">Short, specific, in Dan's own subject matter — not clickbait phrasing.</p>
-          <div class="title-list">
-            <span class="title-chip">Improvise Over Any Chord</span>
-            <span class="title-chip">Mixing a Cinematic Piano Track</span>
-            <span class="title-chip">Grade 8 RCM Exam Prep</span>
-            <span class="title-chip">Gear Talk: Studio Mic Review</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="social">
-      <div class="section-head">
-        <span class="section-num">07</span>
-        <h2>Social Media</h2>
-      </div>
-      <p>Profile avatar is the mark alone, on a navy ground — legible down to 48px. Post templates keep the same ink-and-signal restraint as the thumbnails, even on platforms that reward brighter color; consistency across channels is what reads as professional.</p>
-      <div class="channel-body">
-        <div class="mock-frame">
-          <div class="mock-canvas square">
-            <div class="square-inner">
-              <img class="mark-img" src="data:image/png;base64,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" alt="" width="50" height="50" />
-              <div class="mock-title">New Lesson: Improv Basics</div>
-            </div>
-          </div>
-          <div class="mock-caption"><b>Caption:</b> "Three chords, one idea — the full lesson is up now. Link in bio."</div>
-        </div>
-        <div>
-          <h3>Avatar</h3>
-          <p>The mark alone, white on ink, centered with even padding — no wordmark, no photo background.</p>
-          <h3 style="margin-top:24px">Captions</h3>
-          <p>One idea per post, written in the voice from Section 05 — a fact or a result, not an exclamation.</p>
-        </div>
-      </div>
-    </section>
-
     <section id="email">
       <div class="section-head">
-        <span class="section-num">08</span>
+        <span class="section-num">06</span>
         <h2>Email Newsletters</h2>
       </div>
       <p>Headers stay on the canvas color, not navy — dark bands render inconsistently across mail clients. The call-to-action button is the site's existing <span class="mono-chip">.btn-filled</span> spec exactly, so a reader who clicks through lands somewhere that already looks familiar.</p>
@@ -765,10 +625,10 @@
 
     <section id="reference">
       <div class="section-head">
-        <span class="section-num">09</span>
+        <span class="section-num">07</span>
         <h2>Quick Reference</h2>
       </div>
-      <p>The one page to keep open while building a thumbnail, post, or send.</p>
+      <p>The one page to keep open while building a send.</p>
       <div class="ref-cols">
         <div class="ref-block">
           <h3>Color</h3>
@@ -781,10 +641,10 @@
           <div class="ref-line"><span class="k">Body / UI</span><span class="v">DM Sans</span></div>
         </div>
         <div class="ref-block">
-          <h3>One rule per channel</h3>
-          <div class="ref-line"><span class="k">YouTube</span><span class="v">One serif line, ink ground, no clickbait icons</span></div>
-          <div class="ref-line"><span class="k">Social</span><span class="v">Mark-only avatar, same restraint</span></div>
-          <div class="ref-line"><span class="k">Email</span><span class="v">Canvas header, .btn-filled CTA</span></div>
+          <h3>Email, in one line</h3>
+          <div class="ref-line"><span class="k">Header</span><span class="v">Canvas ground</span></div>
+          <div class="ref-line"><span class="k">Mark</span><span class="v">Navy chip, dt-white.png</span></div>
+          <div class="ref-line"><span class="k">CTA</span><span class="v">.btn-filled spec</span></div>
         </div>
       </div>
     </section>
