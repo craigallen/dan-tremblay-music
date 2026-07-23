@@ -1,6 +1,6 @@
 # Dan Tremblay Music — Brand Strategy & Identity Brief
 
-A creative brief for the Dan Tremblay Music brand, grounded in the existing site (`CLAUDE.md`, `tailwind.config.mjs`, and current copy in `src/pages/`). Intended for a designer or future logo/identity work — no image-generation tool was available in this session, so this is the strategic brief that would normally accompany a generated brand-kit board.
+A brand strategy brief for Dan Tremblay Music, grounded entirely in what's already live on the site (`CLAUDE.md`, `tailwind.config.mjs`, current copy in `src/pages/`, and the existing mark at `public/images/dt-white.png`). This documents the system as it exists — it does not propose a new logo, mark, or color/type system.
 
 ## 1. Brand Strategy
 
@@ -12,19 +12,15 @@ A creative brief for the Dan Tremblay Music brand, grounded in the existing site
 
 **Trust level:** High. Parents are trusting Dan with their kids' development; the site already leans on badges (awards, years, published composer, YouTube creator) to establish credibility fast.
 
-**Core metaphor:** *The score and the signal* — sheet music (structure, discipline, decades of teaching) resolving into a waveform (performance, production, the cinematic/electronic work). The brand mark should live at the point where a written note becomes a played sound.
+**Core metaphor:** *The score and the signal* — sheet music (structure, discipline, decades of teaching) resolving into performance and production (the cinematic/electronic work). Copy and content choices should read as both at once: a teacher parents trust, and a working musician whose ear you'd trust too.
 
 **What the brand should avoid:** cutesy music-school clip art (treble clefs, piano-key borders, rainbow gradients), anything that reads as a hobby studio rather than a professional practice, and anything that skews too corporate/edtech (this is a person, not a platform).
 
-## 2. Logo Concept
+## 2. Existing Mark
 
-**Method:** Monogram + Meaning, using **Metaphor Fusion** as a secondary layer.
+The site already has a mark: a serif **D + T** monogram (`public/images/dt-white.png`), rendered white, used at 44×44px in `Nav.astro` and `Footer.astro`, and as the site favicon (`BaseLayout.astro`). This brief does not propose a new logo — any new collateral (thumbnails, social avatars, email headers) should reuse this exact file.
 
-**Concept:** A monogram built from **D + T**, constructed so the horizontal stroke of the T doubles as a single sustained waveform line, and the negative space between the two letters reads as a piano key edge (a single black key silhouette, not a full keyboard). The mark should work at three sizes: a favicon-scale key/wave glyph alone, a monogram lockup, and a full wordmark ("Dan Tremblay" in the display serif with "Music" in the sans as a small subordinate line — mirroring the hero treatment already on the site: `hero-name` large serif over `hero-title` smaller sans).
-
-**Construction logic:** Grid the monogram on the same proportions as the site's existing rule motif (`hero-rule` — a short horizontal divider under the name). The waveform stroke should be a single continuous line with no more than 3–4 peaks — restrained, not a literal audio-editor waveform.
-
-**Avoid:** grand pianos, treble clefs, musical staff lines as decoration, generic "music note" glyphs.
+**Using it:** it's a white-only asset, so it only works on a dark ground — navy or brand-blue, exactly as it already sits in the nav bar and footer. It doesn't work directly on the light `site-bg` canvas without a dark chip behind it. Don't recolor it, redraw it, vectorize it, or stretch it off its square proportion.
 
 ## 3. Visual Mode
 
@@ -37,7 +33,7 @@ Closest to **Luxury / Editorial**, adapted for a *light* canvas rather than dark
 | Token | Value | Role |
 |---|---|---|
 | `navy` | `#050B1B` | Ink — wordmark, body text on light, dark section backgrounds |
-| `brand` | `#4B5E92` | Primary accent — the "signal" color; used for the waveform stroke, links, active states |
+| `brand` | `#4B5E92` | Primary accent — the "signal" color; used for links, rules, active states, CTA buttons |
 | `site-bg` | `#EFF5FC` | Base canvas — pale, cool, airy |
 | White | `#FFFFFF` | Card surfaces, negative space |
 
@@ -59,13 +55,14 @@ Short options in the site's existing voice (award-forward, craft-forward, not ge
 
 Avoid generic "unlock your potential" edtech phrasing — the existing copy is specific and credential-led (awards, years, named collaborators), and the tagline should match that specificity rather than go abstract.
 
-## 7. Applications (for future logo rollout)
+## 7. Applications
 
-- **Favicon / app icon:** the D+T key/waveform glyph alone, no wordmark.
-- **Nav lockup:** glyph + "Dan Tremblay" wordmark, matching current `Nav.astro` treatment.
+- **Favicon / app icon:** `dt-white.png` alone, no wordmark — already implemented.
+- **Nav lockup:** `dt-white.png` + "Dan Tremblay" text links — already implemented in `Nav.astro`.
 - **Badges/awards strip:** reuse the existing `.badge` component style — pill shape, sans, on `site-bg` or navy depending on section.
-- **Social/YouTube/Twitch avatar:** glyph on navy, single brand-blue stroke — needs to read at 48px given Dan's existing YouTube/Twitch presence.
+- **Social/YouTube/Twitch avatar:** `dt-white.png` on a navy ground — needs to read at 48px given Dan's existing YouTube/Twitch presence.
+- **Email headers:** `dt-white.png` on a small navy chip (since the email body sits on the light canvas) alongside the "Dan Tremblay" wordmark.
 
 ## 8. Why this holds together
 
-Every element ties back to the two-register brand truth: a piano teacher (structure, decades, awards) who is also a composer/producer (sound, licensing, cinematic work). The monogram literalizes that with key + waveform in one stroke; the color system stays disciplined to the two tokens already live on the site; the type pairing keeps the existing serif-for-identity / sans-for-proof split. Nothing here requires new colors, new fonts, or a redesign — it's an identity layer that slots onto the site as built.
+Every element ties back to the two-register brand truth: a piano teacher (structure, decades, awards) who is also a composer/producer (sound, licensing, cinematic work). The color system stays disciplined to the tokens already live on the site; the type pairing keeps the existing serif-for-identity / sans-for-proof split; the existing D+T mark carries forward unchanged. Nothing here requires new colors, new fonts, or a new mark — it's a documentation layer over what's already built.
