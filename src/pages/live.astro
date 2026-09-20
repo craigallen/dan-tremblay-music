@@ -22,23 +22,47 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <!-- PROMO VIDEO -->
+  <!-- PROMO VIDEOS -->
   <section class="video-section">
     <div class="container">
       <div class="video-header">
-        <span class="eyebrow">Watch the Promo Reel</span>
+        <span class="eyebrow">Watch Dan Perform</span>
         <h2 class="section-h" style="text-align:center;margin-top:10px">
-          Live Cinematic Looping
+          From Cinematic Originals to Classic Covers
         </h2>
       </div>
-      <div class="video-wrap">
-        <iframe
-          src="https://www.youtube.com/embed/ngVI3nZcTIc"
-          title="Live Cinematic Looping Promo Reel — Dan Tremblay Music"
-          allowfullscreen
-          loading="lazy"></iframe>
+      <div class="video-grid">
+        <div class="video-item">
+          <div class="video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/OK22zKz2kxk"
+              title="Cinematic Live Looping — Originals — Dan Tremblay Music"
+              allowfullscreen
+              loading="lazy"></iframe>
+          </div>
+          <p class="video-caption">Cinematic Live Looping — Originals</p>
+        </div>
+        <div class="video-item">
+          <div class="video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/7i7e3ViMe84"
+              title="Original Chill Piano — Dan Tremblay Music"
+              allowfullscreen
+              loading="lazy"></iframe>
+          </div>
+          <p class="video-caption">Original Chill Piano</p>
+        </div>
+        <div class="video-item">
+          <div class="video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/NJIwl6IhW1U"
+              title="Classic Songs From Another Generation — Dan Tremblay Music"
+              allowfullscreen
+              loading="lazy"></iframe>
+          </div>
+          <p class="video-caption">Classic Songs From Another Generation</p>
+        </div>
       </div>
-      <p class="video-caption">Live Cinematic Looping Promo Reel — Dan Tremblay Music</p>
     </div>
   </section>
 
@@ -244,12 +268,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: 96px 0;
     background: #eff5fc;
   }
-  .video-section .container {
-    max-width: 860px;
-  }
   .video-header {
     text-align: center;
     margin-bottom: 40px;
+  }
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
   }
   .video-wrap {
     position: relative;
@@ -401,6 +427,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   @media (max-width: 960px) {
+    .video-grid {
+      grid-template-columns: 1fr;
+      max-width: 560px;
+      margin: 0 auto;
+      gap: 48px;
+    }
     .events-grid {
       grid-template-columns: 1fr 1fr;
     }
