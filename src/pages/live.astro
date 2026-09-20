@@ -3,41 +3,66 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="Live Piano Performances — Dan Tremblay Music"
-  description="Hire Dan Tremblay for live cinematic piano performances at weddings, corporate events, and private parties in Ottawa and Stittsville."
+  title="Live Looping Piano Performances — Dan Tremblay Music"
+  description="Hire Dan Tremblay for live looping piano performances — covers and originals, chill to upbeat — at weddings, corporate events, private parties, and retirement residences in Ottawa and Stittsville."
   solidNav={true}
 >
   <!-- HERO -->
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-content">
-      <div class="hero-eyebrow">Services · Live Performance</div>
-      <h1 class="hero-title">Live Piano Performances in Stittsville &amp; Ottawa</h1>
+      <div class="hero-eyebrow">Services · Live Music</div>
+      <h1 class="hero-title">Live Looping Piano in Stittsville &amp; Ottawa</h1>
       <p class="hero-sub">
-        An intimate, cinematic live looping performance featuring all-original, chill vibes perfect
-        for your event.
+        A cinematic live looping performance blending fan-favorite covers with original
+        compositions — from chill and ambient to upbeat and lively. Tailored to your event, any
+        time of day.
       </p>
       <a href="/contact" class="btn-filled">Book Your Event Now</a>
     </div>
   </section>
 
-  <!-- PROMO VIDEO -->
+  <!-- PROMO VIDEOS -->
   <section class="video-section">
     <div class="container">
       <div class="video-header">
-        <span class="eyebrow">Watch the Promo Reel</span>
+        <span class="eyebrow">Watch Dan Perform</span>
         <h2 class="section-h" style="text-align:center;margin-top:10px">
-          Live Cinematic Looping
+          From Cinematic Originals to Classic Covers
         </h2>
       </div>
-      <div class="video-wrap">
-        <iframe
-          src="https://www.youtube.com/embed/ngVI3nZcTIc"
-          title="Live Cinematic Looping Promo Reel — Dan Tremblay Music"
-          allowfullscreen
-          loading="lazy"></iframe>
+      <div class="video-grid">
+        <div class="video-item">
+          <div class="video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/OK22zKz2kxk"
+              title="Cinematic Live Looping — Originals — Dan Tremblay Music"
+              allowfullscreen
+              loading="lazy"></iframe>
+          </div>
+          <p class="video-caption">Cinematic Live Looping — Originals</p>
+        </div>
+        <div class="video-item">
+          <div class="video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/7i7e3ViMe84"
+              title="Original Chill Piano — Dan Tremblay Music"
+              allowfullscreen
+              loading="lazy"></iframe>
+          </div>
+          <p class="video-caption">Original Chill Piano</p>
+        </div>
+        <div class="video-item">
+          <div class="video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/NJIwl6IhW1U"
+              title="Classic Songs From Another Generation — Dan Tremblay Music"
+              allowfullscreen
+              loading="lazy"></iframe>
+          </div>
+          <p class="video-caption">Classic Songs From Another Generation</p>
+        </div>
       </div>
-      <p class="video-caption">Live Cinematic Looping Promo Reel — Dan Tremblay Music</p>
     </div>
   </section>
 
@@ -73,6 +98,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             unforgettable backdrop.
           </p>
         </div>
+        <div class="event-card">
+          <div class="event-icon">☀️</div>
+          <div class="event-title">Retirement Residences</div>
+          <p class="event-desc">
+            Daytime sets of familiar covers alongside original music, tailored to the crowd and
+            easy to enjoy.
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -90,9 +123,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <span class="eyebrow" style="color:rgba(255,255,255,0.4)">The Performance</span>
           <h2 class="section-h light">What to Expect</h2>
           <div class="check-list">
-            <div class="check-item">All-original cinematic compositions</div>
+            <div class="check-item">A mix of well-loved covers and original compositions</div>
             <div class="check-item">Live looping — built in real-time before your audience</div>
-            <div class="check-item">Ambient, chill vibes that work in any setting</div>
+            <div class="check-item">Sets tailored to the room — chill and ambient, or upbeat and lively</div>
+            <div class="check-item">Available for daytime and evening events</div>
             <div class="check-item">Professional, self-contained setup</div>
             <div class="check-item">Flexible set lengths to fit your event</div>
           </div>
@@ -107,7 +141,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <!-- CTA -->
   <section class="cta-band">
     <div class="container">
-      <h2 class="cta-h">Hire Dan for Live Cinematic Piano Music</h2>
+      <h2 class="cta-h">Hire Dan for Live Looping Piano — Covers &amp; Originals</h2>
       <a href="/contact" class="btn-outline-white">Contact for Availability</a>
     </div>
   </section>
@@ -234,12 +268,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: 96px 0;
     background: #eff5fc;
   }
-  .video-section .container {
-    max-width: 860px;
-  }
   .video-header {
     text-align: center;
     margin-bottom: 40px;
+  }
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
   }
   .video-wrap {
     position: relative;
@@ -276,7 +312,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
   .events-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 24px;
   }
   .event-card {
@@ -391,6 +427,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   @media (max-width: 960px) {
+    .video-grid {
+      grid-template-columns: 1fr;
+      max-width: 560px;
+      margin: 0 auto;
+      gap: 48px;
+    }
     .events-grid {
       grid-template-columns: 1fr 1fr;
     }
