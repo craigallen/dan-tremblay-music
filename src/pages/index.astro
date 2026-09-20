@@ -928,6 +928,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   @media (max-width: 640px) {
+    .hero-name {
+      font-size: clamp(40px, 12vw, 58px);
+      letter-spacing: 0.08em;
+    }
+
     .hero-actions {
       flex-direction: column;
       align-items: stretch;
