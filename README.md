@@ -1,14 +1,14 @@
 # Dan Tremblay Music
 
-Static marketing website for piano instructor Dan Tremblay, built with [Astro 4](https://astro.build) and [Tailwind CSS 3](https://tailwindcss.com). Deployed on Vercel.
+Static marketing website for piano instructor Dan Tremblay, built with [Astro 4](https://astro.build) and [Tailwind CSS 3](https://tailwindcss.com). Deployed on Netlify (static build).
 
 ## Tech Stack
 
 - **Framework**: Astro 4
 - **Styling**: Tailwind CSS 3 + scoped component styles
 - **Fonts**: Cormorant Garamond (display), DM Sans (body) via Google Fonts
-- **Email**: Resend
-- **Deployment**: Vercel
+- **Contact form**: Netlify Forms
+- **Deployment**: Netlify (`netlify.toml`)
 
 ## Getting Started
 
@@ -31,7 +31,6 @@ src/
     contact.astro     # Contact page
     live.astro        # Live performance page
     production.astro  # Production services page
-    api/              # API routes (e.g. contact form)
   Footer.astro        # Site footer
   Nav.astro           # Navigation with mobile hamburger menu
   styles/
