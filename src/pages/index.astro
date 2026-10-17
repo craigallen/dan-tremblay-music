@@ -1,12 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroImage from '../components/HeroImage.astro';
 ---
 
 <BaseLayout title="Dan Tremblay Music — Piano Lessons in Stittsville, Ottawa">
 
   <!-- ── HERO ──────────────────────────────────────────────── -->
   <section class="hero">
-    <div class="hero-bg"></div>
+    <div class="hero-bg"><HeroImage /></div>
     <canvas id="hero-particles"></canvas>
     <div class="hero-content">
       <div class="hero-eyebrow">Piano · Lessons · Ottawa</div>
@@ -362,9 +363,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .hero-bg {
     position: absolute;
     inset: 0;
-    background-image: url('/images/piano.jpg');
-    background-size: cover;
-    background-position: center 30%;
   }
 
   #hero-particles {
