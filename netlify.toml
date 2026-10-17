@@ -1,0 +1,126 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
+
+[[redirects]]
+  from = "/sitemap/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/production/music-for-bands/"
+  to = "/production"
+  status = 301
+
+[[redirects]]
+  from = "/production/media-productions/"
+  to = "/production"
+  status = 301
+
+[[redirects]]
+  from = "/production/dan-akai/"
+  to = "/production"
+  status = 301
+
+[[redirects]]
+  from = "/home/dan-akai-2/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home/dan-headphones/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home/dan-live-small/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home/dan-mic/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home/dan-production/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home/dan-teaching-piano-student/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home/dan-tremblay-dambient-sketches-v1/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home/dan-tremblay-danbient-sketches-v2/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home/dan-tremblay-dark-water-pulse/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home/dan-tremblay-glacial-drift/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home/dan-tremblay-sunset-echoes/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home/dan-tremblay/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home/online-course-small/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home/online-course/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home/piano-lesson/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home/piano-lessons-small/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home/piano-lessons/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home/piano/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home/production-services-small/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home/production-services/"
+  to = "/"
+  status = 301
