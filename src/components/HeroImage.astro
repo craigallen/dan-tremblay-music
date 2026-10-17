@@ -1,0 +1,35 @@
+---
+import { Picture } from 'astro:assets';
+import piano from '../assets/images/piano.jpg';
+
+// Decorative full-bleed hero photo. Rendered as a real <img> (not a CSS
+// background) so the browser discovers it in the initial HTML and can
+// fetch it at high priority — it is the LCP element on these pages.
+interface Props {
+  position?: string;
+}
+
+const { position = 'center 30%' } = Astro.props;
+---
+
+<Picture
+  src={piano}
+  alt=""
+  formats={['avif', 'webp']}
+  widths={[640, 960, 1280, 1600, 2048]}
+  sizes="100vw"
+  loading="eager"
+  fetchpriority="high"
+  class="hero-img"
+  style={`object-position: ${position}`}
+/>
+
+<style>
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>

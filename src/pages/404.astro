@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroImage from '../components/HeroImage.astro';
 ---
 
 <BaseLayout
@@ -8,7 +9,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   solidNav={true}
 >
   <section class="not-found">
-    <div class="not-found-bg"></div>
+    <div class="not-found-bg"><HeroImage /></div>
     <div class="not-found-content">
       <div class="eyebrow">Error 404</div>
       <h1 class="not-found-title">Page Not Found</h1>
@@ -44,9 +45,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .not-found-bg {
     position: absolute;
     inset: 0;
-    background-image: url('/images/piano.jpg');
-    background-size: cover;
-    background-position: center 30%;
   }
 
   .not-found-bg::after {

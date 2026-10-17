@@ -7,4 +7,8 @@ export default defineConfig({
   site: 'https://dantremblaymusic.com',
   output: 'static',
   integrations: [tailwind()],
+  build: {
+    // Inline all page CSS into <style> tags so it doesn't block first render.
+    inlineStylesheets: 'always',
+  },
 });

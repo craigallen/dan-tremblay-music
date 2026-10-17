@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroImage from '../components/HeroImage.astro';
+import { Picture } from 'astro:assets';
+import danPhoto from '../assets/images/dan-tremblay.jpeg';
 ---
 
 <BaseLayout
@@ -9,7 +12,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 >
   <!-- HERO -->
   <section class="page-hero">
-    <div class="page-hero-bg"></div>
+    <div class="page-hero-bg"><HeroImage position="center 40%" /></div>
     <div class="page-hero-content">
       <div class="page-eyebrow">Piano Instructor · Producer · Ottawa</div>
       <h1 class="page-title">About Dan</h1>
@@ -59,10 +62,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <a href="/contact" class="btn-navy" style="margin-top:10px">Book a Free Lesson</a>
         </div>
         <div class="history-sidebar">
-          <img
-            src="/images/dan-tremblay.jpeg"
+          <Picture
+            src={danPhoto}
             alt="Dan Tremblay"
             class="sidebar-photo"
+            formats={['avif', 'webp']}
+            widths={[610, 1024]}
+            sizes="610px"
+            loading="lazy"
           />
           <div class="awards-card">
             <div class="awards-title">Awards &amp; Highlights</div>
@@ -143,9 +150,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .page-hero-bg {
     position: absolute;
     inset: 0;
-    background-image: url('/images/piano.jpg');
-    background-size: cover;
-    background-position: center 40%;
   }
   .page-hero-bg::after {
     content: '';
