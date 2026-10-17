@@ -2,6 +2,30 @@
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+// Self-hosted copies of the exact variable font files Google Fonts served
+// (latin subset only). Each face below mirrors one of Google's fixed-weight
+// declarations so rendering is unchanged; unused faces are left out.
+import cormorantNormal from '@fontsource-variable/cormorant-garamond/files/cormorant-garamond-latin-wght-normal.woff2?url';
+import cormorantItalic from '@fontsource-variable/cormorant-garamond/files/cormorant-garamond-latin-wght-italic.woff2?url';
+import dmSansNormal from '@fontsource-variable/dm-sans/files/dm-sans-latin-opsz-normal.woff2?url';
+
+const latinRange =
+  'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD';
+const fontFaces: [family: string, style: string, weight: number, src: string][] = [
+  ['Cormorant Garamond', 'normal', 300, cormorantNormal],
+  ['Cormorant Garamond', 'normal', 400, cormorantNormal],
+  ['Cormorant Garamond', 'normal', 600, cormorantNormal],
+  ['Cormorant Garamond', 'italic', 400, cormorantItalic],
+  ['DM Sans', 'normal', 300, dmSansNormal],
+  ['DM Sans', 'normal', 400, dmSansNormal],
+  ['DM Sans', 'normal', 500, dmSansNormal],
+];
+const fontFaceCss = fontFaces
+  .map(
+    ([family, style, weight, src]) =>
+      `@font-face{font-family:'${family}';font-style:${style};font-weight:${weight};font-display:swap;src:url(${src}) format('woff2');unicode-range:${latinRange}}`
+  )
+  .join('');
 
 interface Props {
   title: string;
@@ -24,12 +48,10 @@ const {
     <link rel="icon" type="image/png" href="/images/dt-white.png" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Preload only the two faces used by the hero heading, nav and body copy -->
+    <link rel="preload" href={dmSansNormal} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={cormorantNormal} as="font" type="font/woff2" crossorigin />
+    <style is:inline set:html={fontFaceCss}></style>
     {Astro.site && <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />}
     {
       import.meta.env.PROD && (
