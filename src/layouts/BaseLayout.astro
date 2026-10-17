@@ -55,18 +55,37 @@ const {
     {Astro.site && <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />}
     {
       import.meta.env.PROD && (
-        <>
-          <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-3NPXK39CYT"
-          ></script>
-          <script is:inline>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {
-              dataLayer.push(arguments);
+        <script is:inline>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-3NPXK39CYT');
+
+          // Commands above are queued in dataLayer; gtag.js replays them (including
+          // the page view) when it loads. Defer that download until after the page
+          // has loaded and the main thread is idle so it doesn't compete with first
+          // render.
+          function loadGtag() {
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-3NPXK39CYT';
+            document.head.appendChild(s);
+          }
+          function scheduleGtag() {
+            if ('requestIdleCallback' in window) {
+              requestIdleCallback(loadGtag, { timeout: 3000 });
+            } else {
+              setTimeout(loadGtag, 1);
             }
-            gtag('js', new Date());
-            gtag('config', 'G-3NPXK39CYT');
-          </script>
-        </>
+          }
+          if (document.readyState === 'complete') {
+            scheduleGtag();
+          } else {
+            window.addEventListener('load', scheduleGtag, { once: true });
+          }
+        </script>
       )
     }
   </head>
